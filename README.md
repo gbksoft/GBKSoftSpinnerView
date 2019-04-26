@@ -6,6 +6,14 @@ It makes customizing process easy.
 
 ![](img/preview.gif)
 
+# Installation
+```groovy
+	dependencies {
+	        implementation 'com.github.gbksoft:GBKSoftSpinnerView:1.0.0'
+	}
+```
+
+
 # Layout
 
 ```xml
