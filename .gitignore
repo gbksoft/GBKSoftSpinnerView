@@ -10,5 +10,5 @@ api.properties
 .idea/*
 build
 build/*
-gradle*
+
 *.apk
