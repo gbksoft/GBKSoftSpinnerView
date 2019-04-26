@@ -9,7 +9,7 @@ It makes customizing process easy.
 # Installation
 ```groovy
 	dependencies {
-	        implementation 'com.github.gbksoft:GBKSoftSpinnerView:1.0.0'
+	        implementation 'com.github.gbksoft:GBKSoftSpinnerView:v1.0.1'
 	}
 ```
 
