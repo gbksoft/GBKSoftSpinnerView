@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <declare-styleable name="SpinnerView" tools:ignore="ResourceName">
+        <attr name="sv_arrow_tint" format="color" />
+        <attr name="sv_arrow_drawable" format="reference" />
+        <attr name="sv_dropdown_background" format="reference" />
+        <attr name="sv_dropdown_elevation" format="dimension" />
+        <attr name="sv_dropdown_max_height" format="dimension" />
+        <attr name="sv_dropdown_height" format="dimension">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+    </declare-styleable>
+</resources>

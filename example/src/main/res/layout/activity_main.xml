@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.gbksoft.example.MainActivity">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.gbksoft.spinnerview.SpinnerView
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:padding="8dp"
+            android:hint="Test hint"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/colorPrimary"
+            app:sv_arrow_drawable="@drawable/ic_dropdown_arrow_animated"
+            app:sv_arrow_tint="@android:color/holo_blue_bright"
+            app:sv_dropdown_background="@drawable/bgn_dropdown"
+            app:sv_dropdown_elevation="1dp"
+            app:sv_dropdown_height="wrap_content"
+            app:sv_dropdown_max_height="350dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

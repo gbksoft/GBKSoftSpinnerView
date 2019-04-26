@@ -1,0 +1,20 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+group='com.gitlab.gbksoft.net/ivantsov-oo'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0.0"
+
+    }
+
+    dependencies {
+        implementation 'androidx.annotation:annotation:1.0.2'
+        implementation "androidx.appcompat:appcompat:1.1.0-alpha04"
+    }
+}
