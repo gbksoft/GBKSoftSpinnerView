@@ -19,9 +19,9 @@ allprojects {
 
 Add to the app level gradle:
 ```groovy
-	dependencies {
-	        implementation 'com.github.gbksoft:GBKSoftSpinnerView:v1.0.1'
-	}
+dependencies {
+        implementation 'com.github.gbksoft:GBKSoftSpinnerView:v1.0.1'
+}
 ```
 
 
