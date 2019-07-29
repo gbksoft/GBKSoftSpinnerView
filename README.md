@@ -19,12 +19,6 @@ allprojects {
 
 Add to the app level gradle:
 ```groovy
-dependencies {
-    implementation 'com.github.gbksoft:GBKXYRecycler:v1.0.0'
-}
-```
-
-```groovy
 	dependencies {
 	        implementation 'com.github.gbksoft:GBKSoftSpinnerView:v1.0.1'
 	}
