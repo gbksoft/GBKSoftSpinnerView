@@ -13,10 +13,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +28,8 @@ public class SpinnerView extends AppCompatTextView {
     private PopupWindow dropDown;
     private ListView listView;
     private Drawable arrowDrawable;
+    private Integer preferredItemsCount;
+    private boolean adaptDropDownHeightToItemsSizeLimitedByMaxHeight;
     private boolean nothingSelected;
     private int dropDownMaxHeight;
     private int dropDownHeight;
@@ -63,6 +63,9 @@ public class SpinnerView extends AppCompatTextView {
             arrowDrawable = ta.getDrawable(R.styleable.SpinnerView_sv_arrow_drawable);
             popupWindowBackgroundId = ta.getResourceId(R.styleable.SpinnerView_sv_dropdown_background, 0);
             popupWindowElevation = ta.getDimensionPixelSize(R.styleable.SpinnerView_sv_dropdown_elevation, 16);
+            int tempDisplayedItemsCount = ta.getInteger(R.styleable.SpinnerView_sv_dropdown_displayed_items_count, -1);
+            preferredItemsCount = tempDisplayedItemsCount > 0 ? tempDisplayedItemsCount : null;
+            adaptDropDownHeightToItemsSizeLimitedByMaxHeight = ta.getBoolean(R.styleable.SpinnerView_sv_dropdown_adapt_height_to_items_size, false);
         } finally {
             ta.recycle();
         }
@@ -205,22 +208,72 @@ public class SpinnerView extends AppCompatTextView {
 
     private int calculatePopupWindowHeight() {
         if (adapter != null && adapter.getCount() > 0) {
-            float listViewHeight = getListViewHeight();
+            float listViewHeight;
+            if(preferredItemsCount != null){
+                int itemsToCalculate = preferredItemsCount > adapter.getCount() ? adapter.getCount() : preferredItemsCount;
+                listViewHeight = getItemHeightForItems(itemsToCalculate);
+                if(dropDownMaxHeight <= 0){
+                    int possibleHeight = (int) listViewHeight;
+                    if(dropDown != null) {
+                        int availableHeight = dropDown.getMaxAvailableHeight(this);
+                        if (availableHeight > 0 && availableHeight < possibleHeight) {
+                            possibleHeight = availableHeight;
+                        }
+                    }
+                    return possibleHeight;
+                }
+            }else{
+                listViewHeight = getListViewHeight();
+            }
             if (dropDownMaxHeight > 0 && listViewHeight > dropDownMaxHeight) {
-                return dropDownMaxHeight;
+                if (adaptDropDownHeightToItemsSizeLimitedByMaxHeight) {
+                    return adaptDropDownMaxHeightToMatchItemsInList(dropDownMaxHeight);
+                } else {
+                    return dropDownMaxHeight;
+                }
+
             } else {
+                if(dropDown != null && adaptDropDownHeightToItemsSizeLimitedByMaxHeight){
+                    return adaptDropDownMaxHeightToMatchItemsInList(dropDown.getMaxAvailableHeight(this));
+                }
                 return dropDownHeight;
             }
+
         }
         return WindowManager.LayoutParams.WRAP_CONTENT;
     }
 
-    private int getListViewHeight() {
-        View item = adapter.getView(0, null, listView);
+    private int adaptDropDownMaxHeightToMatchItemsInList(int limit) {
+        int resultMaxHeight = 0;
+        for (int i = 0; i < adapter.getCount(); i++) {
+            int currentItemHeight = getItemHeight(i);
+            int tempResult = resultMaxHeight + currentItemHeight;
+            if (tempResult > limit) {
+                return resultMaxHeight;
+            } else {
+                resultMaxHeight += currentItemHeight;
+            }
+        }
+        return limit;
+    }
+
+    private int getItemHeight(int position) {
+        View item = adapter.getView(position, null, listView);
         int measureSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
         item.measure(measureSpec, measureSpec);
-        int itemHeight = item.getMeasuredHeight();
-        return adapter.getCount() * itemHeight;
+        return item.getMeasuredHeight();
+    }
+
+    private int getListViewHeight() {
+        return getItemHeightForItems(adapter.getCount());
+    }
+
+    private int getItemHeightForItems(int itemsCount) {
+        int resultViewHeight = 0;
+        for (int i = 0; i < itemsCount; i++) {
+            resultViewHeight += getItemHeight(i);
+        }
+        return resultViewHeight;
     }
 
     public PopupWindow getDropDown() {

@@ -42,23 +42,28 @@ dependencies {
         app:sv_dropdown_background="@drawable/bgn_dropdown"
         app:sv_dropdown_elevation="1dp"
         app:sv_dropdown_height="wrap_content"
-        app:sv_dropdown_max_height="350dp" />
+        app:sv_dropdown_max_height="350dp"
+        app:sv_dropdown_displayed_items_count="5"
+        app:sv_dropdown_adapt_height_to_items_size="true"
+         />
 ```
             
 # Customizing
 
 There are some additional attributes to configure dropdown:
 
-| Attribute              | Info |
-| ---------------------- | ------ |
-| sv_arrow_drawable      | right arrow icon that indicate dropdown status (expanded / collapsed) |
-| sv_arrow_tint          | tint color for right arrow | 
-| sv_dropdown_background | Backgroun drawable for dropdown | 
-| sv_dropdown_elevation  | Dropdown elevation | 
-| sv_dropdown_max_height | Dropdown max height (it will not expand more than this value) |
-| sv_dropdown_height     | match_parent, wrap_content|
+| Attribute                              | Info |
+| ----------------------                 | ------ |
+| sv_arrow_drawable                      | right arrow icon that indicate dropdown status (expanded / collapsed) |
+| sv_arrow_tint                          | tint color for right arrow | 
+| sv_dropdown_background                 | Background drawable for dropdown | 
+| sv_dropdown_elevation                  | Dropdown elevation | 
+| sv_dropdown_max_height                 | Dropdown max height (it will not expand more than this value) |
+| sv_dropdown_displayed_items_count      | Set count of displayed items in dropdown view|
+| sv_dropdown_adapt_height_to_items_size | This flag will resize dropdown view size to match of full view height|
+| sv_dropdown_height                     | match_parent, wrap_content|
 
-To make arrow rotatible define sv_arrow_drawable like this:
+To make arrow rotatable define sv_arrow_drawable like this:
 
 ```xml
 <rotate xmlns:android="http://schemas.android.com/apk/res/android"

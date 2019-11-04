@@ -10,5 +10,7 @@
             <enum name="match_parent" value="-1" />
             <enum name="wrap_content" value="-2" />
         </attr>
+        <attr name="sv_dropdown_displayed_items_count" format="integer"/>
+        <attr name="sv_dropdown_adapt_height_to_items_size" format="boolean"/>
     </declare-styleable>
 </resources>
